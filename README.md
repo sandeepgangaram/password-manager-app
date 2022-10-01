@@ -1,7 +1,7 @@
 # Password Manager for Desktop
 
 It will both generate strong and secure passwords, as well as manage you already existing passwords.
-## Written in Python
+### Written in Python
     Packages used: tkinter, random, pyperclip, pyinstaller (to bundle) 
 
 ### Why
