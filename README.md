@@ -4,7 +4,7 @@ It will both generate strong and secure passwords, as well as manage you already
 ### Written in Python
     Packages used: tkinter, random, pyperclip, pyinstaller (to bundle) 
 
-### Why
+### Why even a Password Manager?
 "How much of your digital life would you lose if you lost a single password? 
 Without it, you are locked out and the cold reality of using free cloud 
 services like Google is that you don’t have a human arbiter to help you. 
