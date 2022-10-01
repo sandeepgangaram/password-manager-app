@@ -1,6 +1,8 @@
 # Password Manager for Desktop
 
 It will both generate strong and secure passwords, as well as manage you already existing passwords.
+## Written in Python
+    Packages used: tkinter, random, pyperclip, pyinstaller (to bundle) 
 
 ### Why
 "How much of your digital life would you lose if you lost a single password? 
@@ -21,12 +23,17 @@ you get locked out after forgetting your password. ...[Continue Reading](https:/
 - Clone the repo locally:
 `git clone https://github.com/sandeepgangaram/password-manager-app.git`
 
-- Run `main.py`
+- Run `password_manager.py`
 
 Play around with the widgets and their features. 
 
-or
+### To Run the App from explorer:
 
-Just sit back and let the Password Manager take care of your passwords.
+ - Download the repository
+ - Go to dist folder
+ - Double click or run password_manager.exe file.
+
+Now relax and let the Password Manager take care of your passwords.
+
 
 Happy Coding!
