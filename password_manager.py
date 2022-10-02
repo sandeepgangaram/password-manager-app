@@ -3,6 +3,26 @@ from tkinter import messagebox
 import random
 import pyperclip
 import json
+
+# ---------------------------- SEARCH PASSWORD ------------------------------- #
+
+
+def search_password():
+    website = website_input.get().title()
+
+    try:
+        with open("data.json", 'r') as file:
+            data = json.load(file)
+    except FileNotFoundError:
+        messagebox.showinfo(title="Oops! Error", message="No data file found. Go ahead and save your passwords.")
+    else:
+        if website in data:
+            credentials = data[website]
+            messagebox.showinfo(title=f"{website}",
+                                message=f"Email:{credentials['email']}\nPassword:{credentials['password']}")
+        else:
+            messagebox.showinfo(title=f"{website}", message=f"No details found for {website}")
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 
@@ -29,7 +49,6 @@ def generate_password():
     password_input.insert(0, password_output)
 
     pyperclip.copy(password_output)
-    messagebox.showinfo(title="Copied!", message="Password copied to clipboard!")
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
 
@@ -40,7 +59,7 @@ def clear_inputs():
 
 
 def save_details():
-    website = website_input.get()
+    website = website_input.get().title()
     username = email_input.get()
     password = password_input.get()
 
@@ -95,6 +114,7 @@ password_label = Label(text="Password:")
 # Buttons
 generate_button = Button(text="Generate Password", command=generate_password)
 add_button = Button(text="Add", command=save_details)
+search_button = Button(text="Search", command=search_password)
 
 # Inputs
 website_input = Entry()
@@ -105,7 +125,8 @@ website_input.focus()
 # Layout
 canvas.grid(row=0, column=1)
 website_label.grid(row=1, column=0)
-website_input.grid(row=1, column=1, columnspan=2, sticky='EW')
+website_input.grid(row=1, column=1, sticky='EW')
+search_button.grid(row=1, column=2, sticky='EW')
 username_label.grid(row=2, column=0)
 email_input.grid(row=2, column=1, columnspan=2, sticky='EW')
 password_label.grid(row=3, column=0)
