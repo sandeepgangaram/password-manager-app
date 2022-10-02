@@ -8,7 +8,7 @@ import json
 
 
 def search_password():
-    website = website_input.get().title()
+    website = website_input.get().title().strip()
 
     try:
         with open("data.json", 'r') as file:
@@ -59,39 +59,52 @@ def clear_inputs():
 
 
 def save_details():
-    website = website_input.get().title()
-    username = email_input.get()
-    password = password_input.get()
+    website = website_input.get().title().strip()
+    username = email_input.get().strip()
+    password = password_input.get().strip()
 
     if len(website) == 0 or len(username) == 0 or len(password) == 0:
         messagebox.showinfo(title="Empty Fields!", message="Do not leave any fields empty!")
         return
+    try:
+        with open("data.json", mode='r') as file:
+            data = json.load(file)
+    except FileNotFoundError:
+        pass
+    else:
+        if website in data:
+            overwrite = messagebox.askokcancel(title="Duplicate data",
+                                               message=f"Details for {website} already exist. Want to overwrite?")
+            if not overwrite:
+                return
 
     is_ok = messagebox.askokcancel(title="confirm Save", message=f"""Credentials for Website:{website}\n
     Email: {username}\n
     Password: {password}\n
     Press OK to confirm or Cancel to edit.""")
 
-    if is_ok:
-        save_data = {
-            website: {
-                "email": username,
-                "password": password
+    if not is_ok:
+        return
+
+    save_data = {
+        website: {
+            "email": username,
+            "password": password
             }
         }
-        try:
-            with open('data.json', mode='r') as file:
-                # read data
-                data = json.load(file)
-                data.update(save_data)
-        except (FileNotFoundError, json.JSONDecodeError):
-            with open('data.json', mode='w') as file:
-                json.dump(save_data, file, indent=4)
-        else:
-            with open('data.json', mode='w') as file:
-                json.dump(data, file, indent=4)
-        finally:
-            clear_inputs()
+    try:
+        with open('data.json', mode='r') as file:
+            # read data
+            data = json.load(file)
+            data.update(save_data)
+    except (FileNotFoundError, json.JSONDecodeError):
+        with open('data.json', mode='w') as file:
+            json.dump(save_data, file, indent=4)
+    else:
+        with open('data.json', mode='w') as file:
+            json.dump(data, file, indent=4)
+    finally:
+        clear_inputs()
 
 
 # ---------------------------- UI SETUP ------------------------------- #
