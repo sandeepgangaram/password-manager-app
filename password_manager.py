@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 import random
 import pyperclip
+import json
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 
@@ -53,12 +54,25 @@ def save_details():
     Press OK to confirm or Cancel to edit.""")
 
     if is_ok:
-        save_data = f"{website} | {username} | {password}\n"
-
-        with open('data.txt', mode='a') as file:
-            file.write(save_data)
-
-        clear_inputs()
+        save_data = {
+            website: {
+                "email": username,
+                "password": password
+            }
+        }
+        try:
+            with open('data.json', mode='r') as file:
+                # read data
+                data = json.load(file)
+                data.update(save_data)
+        except (FileNotFoundError, json.JSONDecodeError):
+            with open('data.json', mode='w') as file:
+                json.dump(save_data, file, indent=4)
+        else:
+            with open('data.json', mode='w') as file:
+                json.dump(data, file, indent=4)
+        finally:
+            clear_inputs()
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -72,7 +86,6 @@ window.config(height=200, width=200, pady=50, padx=50)
 canvas = Canvas(width=200, height=200)
 logo = PhotoImage(file='logo.png')
 canvas.create_image(100, 100, image=logo)
-
 
 # Labels
 website_label = Label(text="Website:")

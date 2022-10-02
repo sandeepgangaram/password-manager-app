@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(
-    ['main.py'],
+    ['password_manager.py'],
     pathex=[],
     binaries=[],
     datas=[('*.png', '.')],
@@ -28,7 +28,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='main',
+    name='password_manager',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
