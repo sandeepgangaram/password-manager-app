@@ -1,14 +1,17 @@
 # Password Manager for Desktop
 
-It will both generate strong and secure passwords, as well as manage you already existing passwords.
+### Features:
+ - Generates strong and secure passwords
+ - Saves your passwords to local file in json format
+ - Searches for passwords from the already saved data
 ### Written in Python
-    Packages used: tkinter, random, pyperclip, pyinstaller (to bundle) 
+    Modules used: tkinter, random, pyperclip, json, pyinstaller (to bundle) 
 
 ### Why even a Password Manager?
-"How much of your digital life would you lose if you lost a single password? 
+"...How much of your digital life would you lose if you lost a single password? 
 Without it, you are locked out and the cold reality of using free cloud 
 services like Google is that you don’t have a human arbiter to help you. 
-If you think back to earlier times where, say you lost your bank book, 
+If you think back to earlier times when, say you lost your bank book, 
 your local banker probably knew who you were and could help you navigate 
 the process of getting it replaced. When you lose your password, it’s not
 that simple — as I found out.
